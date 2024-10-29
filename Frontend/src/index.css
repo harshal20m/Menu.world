@@ -1,0 +1,20 @@
+/* src/index.css or src/App.css */
+
+/* Import Slick Carousel styles at the top */
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+/* Tailwind CSS imports */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Other custom styles can follow */
+/* src/styles.css (or your main CSS file) */
+body {
+	@apply bg-white text-black; /* Default light theme styles */
+}
+
+body.dark {
+	@apply bg-gray-900 text-white; /* Dark theme styles */
+}
