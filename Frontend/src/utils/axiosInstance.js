@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-	baseURL: "https://menu-world.onrender.com", // Change to your API's base URL
+	baseURL: "https://menu-world.onrender.com/api", // Change to your API's base URL
 	timeout: 10000, // Set a timeout for requests
 });
 
