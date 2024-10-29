@@ -14,7 +14,7 @@ const Template1 = ({ menu }) => {
 			{menu.items.map((item) => (
 				<div key={item._id} className="menu-item mb-4">
 					<h3 className="text-yellow-500 text-lg sm:text-xl mb-1">
-						{item.name} <span className="float-right text-yellow-500">rs.{item.price / 100}</span>
+						{item.name} <span className="float-right text-yellow-500">rs.{item.price}</span>
 					</h3>
 					<p className="text-gray-400 text-sm sm:text-base">{item.description}</p>
 				</div>
