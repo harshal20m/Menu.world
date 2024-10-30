@@ -1,0 +1,21 @@
+org: harshalmali # Ensure this service is used with the correct Serverless Framework Access Key.
+service: menuworldbackend # The name of the service/project
+
+provider:
+    name: aws
+    runtime: nodejs16.x # You can change to nodejs20.x if you're using Node.js 20
+    region: us-east-1 # Default region, change if necessary
+    environment: # Environment variables for MongoDB URI, etc.
+        MONGO_URI: ${env:MONGO_URI} # Ensure this is set in your environment or .env file
+
+functions:
+    api:
+        handler: handler.handler # Reference to your Express app handler
+        events:
+            - httpApi: "*" # To catch all HTTP events
+
+custom:
+    serverless-offline:
+        httpPort: 3000 # Port for local testing, change if necessary
+        lambdaPort: 3002 # Port for local Lambda invocation
+
