@@ -36,8 +36,7 @@ const Template7 = ({ menu }) => {
 							className="menu-item mb-4 transition-transform transform hover:translate-x-2"
 						>
 							<h3 className="text-lg font-normal text-[#e0e0e0] flex justify-between items-baseline">
-								{item.name}{" "}
-								<span className="font-semibold text-[#4ecdc4]">rs.{(item.price / 100).toFixed(2)}</span>
+								{item.name} <span className="font-semibold text-[#4ecdc4]">rs.{item.price}</span>
 							</h3>
 							<p className="text-gray-400">{item.description}</p>
 						</div>

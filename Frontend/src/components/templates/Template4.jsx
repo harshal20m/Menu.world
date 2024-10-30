@@ -35,8 +35,7 @@ const Template4 = ({ menu }) => {
 					{menu.items.map((item) => (
 						<div key={item._id} className="menu-item mb-4">
 							<h3 className="text-md sm:text-lg font-semibold text-[#5c4b3e] flex justify-between items-baseline">
-								{item.name}{" "}
-								<span className="text-[#d35400] font-semibold">rs.{(item.price / 100).toFixed(2)}</span>
+								{item.name} <span className="text-[#d35400] font-semibold">rs.{item.price}</span>
 							</h3>
 							<p className="text-gray-600 text-sm sm:text-base">{item.description}</p>
 						</div>

@@ -95,7 +95,7 @@ export default function RestaurantMenu({ menu }) {
 					<div key={item._id} style={styles.item}>
 						<div style={styles.itemHeader}>
 							<h3 style={styles.itemName}>{item.name}</h3>
-							<span style={styles.itemPrice}>rs.{(item.price / 100).toFixed(2)}</span>
+							<span style={styles.itemPrice}>rs.{item.price}</span>
 						</div>
 						<p style={styles.itemDescription}>{item.description}</p>
 					</div>

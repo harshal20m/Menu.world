@@ -27,10 +27,7 @@ const Template8 = ({ menu }) => {
 							/>
 							<div className=" flex-grow">
 								<h3 className="text-sm font-normal text-[#e0e0e0] flex justify-between items-baseline">
-									{item.name}{" "}
-									<span className="font-semibold text-[#5352ed]">
-										rs.{(item.price / 100).toFixed(2)}
-									</span>
+									{item.name} <span className="font-semibold text-[#5352ed]">rs.{item.price}</span>
 								</h3>
 								<p className="text-xs text-gray-400">{item.description}</p>
 							</div>

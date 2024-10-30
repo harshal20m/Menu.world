@@ -34,7 +34,7 @@ const Template3 = ({ menu }) => {
 						<div key={item._id} className="menu-item mb-4">
 							<h3 className="text-md sm:text-lg font-semibold text-[#333] flex justify-between">
 								{item.name}
-								<span className="text-[#0077be] font-semibold">rs.{(item.price / 100).toFixed(2)}</span>
+								<span className="text-[#0077be] font-semibold">rs.{item.price}</span>
 							</h3>
 							<p className="text-gray-600 text-sm sm:text-base">{item.description}</p>
 						</div>

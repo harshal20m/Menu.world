@@ -71,7 +71,7 @@ const Template9 = ({ menu }) => {
 						<div className="flex flex-col">
 							<h3 style={cardStyles.itemName}>{item.name}</h3>
 							<span style={cardStyles.itemPrice} className="text-xs">
-								rs.{(item.price / 100).toFixed(2)}
+								rs.{item.price}
 							</span>
 						</div>
 						<div className="font-serif">
