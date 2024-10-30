@@ -72,7 +72,7 @@ export default function Home({ isAuthenticated = false }) {
 						onClick={handleExploreTemplates}
 						className="border border-green-500 text-green-500 hover:bg-green-500 hover:text-white font-semibold py-2 px-4 rounded-lg"
 					>
-						Explore Templates
+						Explore Designs
 					</button>
 				</motion.div>
 
