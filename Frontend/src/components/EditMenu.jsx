@@ -72,7 +72,7 @@ const EditMenu = () => {
 						value={menuTitle}
 						onChange={(e) => setMenuTitle(e.target.value)}
 						required
-						className="border text-gray-700 border-gray-300 dark:border-gray-600 p-3 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+						className="border text-gray-900 dark:text-gray-100 border-gray-400 dark:border-gray-500 bg-gray-100 dark:bg-gray-700 p-3 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
 					/>
 				</div>
 				<div>
@@ -82,7 +82,7 @@ const EditMenu = () => {
 						value={menuTemplate}
 						onChange={(e) => setMenuTemplate(e.target.value)}
 						required
-						className="border text-gray-700 border-gray-300 dark:border-gray-600 p-3 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+						className="border text-gray-900 dark:text-gray-100 border-gray-400 dark:border-gray-500 bg-gray-100 dark:bg-gray-700 p-3 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
 					/>
 				</div>
 				<div>
@@ -100,7 +100,7 @@ const EditMenu = () => {
 									value={item.name}
 									onChange={(e) => handleChangeItem(index, e)}
 									required
-									className="border text-gray-700 border-gray-300 dark:border-gray-600 p-3 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+									className="border text-gray-900 dark:text-gray-100 border-gray-400 dark:border-gray-500 bg-gray-100 dark:bg-gray-700 p-3 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
 								/>
 							</div>
 							<div>
@@ -111,7 +111,7 @@ const EditMenu = () => {
 									value={item.price}
 									onChange={(e) => handleChangeItem(index, e)}
 									required
-									className="border text-gray-700 border-gray-300 dark:border-gray-600 p-3 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+									className="border text-gray-900 dark:text-gray-100 border-gray-400 dark:border-gray-500 bg-gray-100 dark:bg-gray-700 p-3 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
 								/>
 							</div>
 							<div>
@@ -121,7 +121,7 @@ const EditMenu = () => {
 									name="description"
 									value={item.description}
 									onChange={(e) => handleChangeItem(index, e)}
-									className="border text-gray-700 border-gray-300 dark:border-gray-600 p-3 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+									className="border text-gray-900 dark:text-gray-100 border-gray-400 dark:border-gray-500 bg-gray-100 dark:bg-gray-700 p-3 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
 								/>
 							</div>
 							<button
@@ -148,6 +148,7 @@ const EditMenu = () => {
 					Update Menu
 				</button>
 			</form>
+
 			{error && <p className="text-red-500 mt-4 text-center">{error}</p>}
 			{success && <p className="text-green-500 mt-4 text-center">{success}</p>}
 		</div>
