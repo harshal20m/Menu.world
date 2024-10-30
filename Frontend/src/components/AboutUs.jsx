@@ -1,6 +1,6 @@
 // src/pages/AboutUs.jsx
 import React, { useState } from "react";
-// import emailjs from "emailjs-com";
+import emailjs from "emailjs-com";
 
 const AboutUs = () => {
 	const [feedback, setFeedback] = useState("");
@@ -25,7 +25,12 @@ const AboutUs = () => {
 
 		// Use your EmailJS user ID, service ID, and template ID
 		emailjs
-			.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", { message: feedback, name }, "YOUR_USER_ID")
+			.send(
+				"service_p8wr0oh",
+				"template_qi4jmrd",
+				{ message: feedback, name, date: new Date().toLocaleString() },
+				"r3yBJf8U40GHRlhXb"
+			)
 			.then(
 				(result) => {
 					setSuccess(true);
@@ -81,14 +86,14 @@ const AboutUs = () => {
 			>
 				<input
 					type="text"
-					className="w-full p-2 border dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 rounded mb-2"
+					className="w-full p-2 border   bg-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 rounded mb-2"
 					placeholder="Your Name"
 					value={name}
 					onChange={handleNameChange}
 					required
 				/>
 				<textarea
-					className="w-full p-2 border dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 rounded mb-2"
+					className="w-full p-2 border   bg-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 rounded mb-2"
 					rows="4"
 					placeholder="Your feedback..."
 					value={feedback}
