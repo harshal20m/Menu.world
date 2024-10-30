@@ -1,6 +1,6 @@
 const Footer = () => {
 	return (
-		<footer className="p-4 bottom-0 bg-gray-900 dark:bg-gray-800 text-gray-400 text-center">
+		<footer className="p-4 bg-gray-900 dark:bg-gray-800 text-gray-400 text-center rounded-t-[100px] md:rounded-t-none">
 			<div className="space-y-4">
 				<p>
 					© {new Date().getFullYear()} Menu.world All rights reserved by{" "}

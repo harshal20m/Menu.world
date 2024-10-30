@@ -5,6 +5,7 @@ import axiosInstance from "../utils/axiosInstance";
 const LoginRegister = ({ onLogin }) => {
 	const [isLogin, setIsLogin] = useState(true);
 	const [formData, setFormData] = useState({ username: "", email: "", password: "" });
+	const [loading, setLoading] = useState(false); // Loader state
 	const navigate = useNavigate();
 
 	const handleChange = (e) => {
@@ -14,6 +15,7 @@ const LoginRegister = ({ onLogin }) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const endpoint = isLogin ? "/auth/login" : "/auth/register";
+		setLoading(true); // Start loading
 		try {
 			const response = await axiosInstance.post(endpoint, formData);
 			localStorage.setItem("token", response.data.token); // Store the token
@@ -21,6 +23,8 @@ const LoginRegister = ({ onLogin }) => {
 			navigate("/dashboard");
 		} catch (error) {
 			console.error(error.response.data);
+		} finally {
+			setLoading(false); // End loading
 		}
 	};
 
@@ -59,9 +63,16 @@ const LoginRegister = ({ onLogin }) => {
 				/>
 				<button
 					type="submit"
-					className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-lg hover:bg-opacity-80 transition duration-200 font-semibold"
+					className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-lg hover:bg-opacity-80 transition duration-200 font-semibold flex justify-center items-center"
+					disabled={loading} // Disable the button while loading
 				>
-					{isLogin ? "Login" : "Register"}
+					{loading ? (
+						<span className="loader"></span> // Custom loader component or style
+					) : isLogin ? (
+						"Login"
+					) : (
+						"Register"
+					)}
 				</button>
 			</form>
 			<button
@@ -70,6 +81,23 @@ const LoginRegister = ({ onLogin }) => {
 			>
 				Switch to {isLogin ? "Register" : "Login"}
 			</button>
+			<style>
+				{`
+					.loader {
+						border: 2px solid transparent;
+						border-top: 2px solid white; /* Change this to the desired loader color */
+						border-radius: 50%;
+						width: 20px;
+						height: 20px;
+						animation: spin 0.6s linear infinite;
+					}
+
+					@keyframes spin {
+						0% { transform: rotate(0deg); }
+						100% { transform: rotate(360deg); }
+					}
+				`}
+			</style>
 		</div>
 	);
 };
