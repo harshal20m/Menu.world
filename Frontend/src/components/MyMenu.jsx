@@ -112,7 +112,12 @@ const MyMenu = () => {
 		};
 	};
 
-	if (loading) return <div>Loading...</div>;
+	if (loading)
+		return (
+			<div className="flex justify-center items-center min-h-screen">
+				<span className="loading loading-dots loading-lg"></span>
+			</div>
+		);
 	if (error) return <div className="text-red-500">{error}</div>;
 
 	return (

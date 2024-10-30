@@ -47,7 +47,11 @@ const TemplatePage = () => {
 	}, [id]);
 
 	if (!menu) {
-		return <div className="text-white">Loading...</div>; // Loading state
+		return (
+			<div className="flex justify-center items-center min-h-screen">
+				<span className="loading loading-dots loading-lg"></span>
+			</div>
+		); // Loading state
 	}
 
 	if (!TemplateComponent) {

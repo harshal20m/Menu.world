@@ -38,25 +38,18 @@ const App = () => {
 	return (
 		<div>
 			<Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
-			{/* Loader component shown while loading */}
-			{isLoading ? (
-				<div className="flex justify-center items-center min-h-screen">
-					<span className="loading loading-dots loading-lg"></span>
-				</div>
-			) : (
-				<>
-					<Routes>
-						<Route path="/edit/:id" element={<EditMenu />} />
-						<Route path="/" element={<Home isAuthenticated={isAuthenticated} />} />
-						<Route path="/create-menu" element={<NewMenu />} />
-						<Route path="/explore" element={<SelectTemplate />} />
-						<Route path="/login" element={<LoginRegister onLogin={handleLogin} />} />
-						<Route path="/menus/:id" element={<TemplatePage />} />
-						<Route path="/dashboard" element={<Dashboard />} />
-						<Route path="/about" element={<AboutUs />} />
-					</Routes>
-				</>
-			)}
+
+			<Routes>
+				<Route path="/edit/:id" element={<EditMenu />} />
+				<Route path="/" element={<Home isAuthenticated={isAuthenticated} />} />
+				<Route path="/create-menu" element={<NewMenu />} />
+				<Route path="/explore" element={<SelectTemplate />} />
+				<Route path="/login" element={<LoginRegister onLogin={handleLogin} />} />
+				<Route path="/menus/:id" element={<TemplatePage />} />
+				<Route path="/dashboard" element={<Dashboard />} />
+				<Route path="/about" element={<AboutUs />} />
+			</Routes>
+
 			<Footer />
 		</div>
 	);
