@@ -181,21 +181,21 @@ const MyMenu = () => {
 						<input
 							type="text"
 							placeholder="Title"
-							className="w-full mb-2 p-2 border dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 text-gray-800 rounded placeholder-gray-500 dark:placeholder-gray-400"
+							className="w-full mb-2 p-2 bg-white border dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 text-gray-800 rounded placeholder-gray-500 dark:placeholder-gray-400"
 							value={qrSettings.title}
 							onChange={(e) => setQrSettings({ ...qrSettings, title: e.target.value })}
 						/>
 						<input
 							type="Date"
 							placeholder="Date"
-							className="w-full mb-2 p-2 border dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 text-gray-800 rounded placeholder-gray-500 dark:placeholder-gray-400"
+							className="w-full mb-2 p-2 border bg-white dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 text-gray-800 rounded placeholder-gray-500 dark:placeholder-gray-400"
 							value={qrSettings.date}
 							onChange={(e) => setQrSettings({ ...qrSettings, date: e.target.value })}
 						/>
 						<input
 							type="text"
 							placeholder="Contact"
-							className="w-full mb-2 p-2 border dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 text-gray-800 rounded placeholder-gray-500 dark:placeholder-gray-400"
+							className="w-full mb-2 p-2 border bg-white dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 text-gray-800 rounded placeholder-gray-500 dark:placeholder-gray-400"
 							value={qrSettings.contact}
 							onChange={(e) => setQrSettings({ ...qrSettings, contact: e.target.value })}
 						/>

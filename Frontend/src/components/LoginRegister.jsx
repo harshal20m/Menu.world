@@ -2,10 +2,29 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
 
+const Modal = ({ message, onClose }) => {
+	return (
+		<div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+			<div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+				<h3 className="text-lg font-bold text-gray-800 dark:text-white">Error</h3>
+				<p className="mt-2 text-gray-600 dark:text-gray-300">{message}</p>
+				<button
+					onClick={onClose}
+					className="mt-4 bg-purple-500 text-white p-2 rounded-lg hover:bg-purple-600 transition duration-200"
+				>
+					Close
+				</button>
+			</div>
+		</div>
+	);
+};
+
 const LoginRegister = ({ onLogin }) => {
 	const [isLogin, setIsLogin] = useState(true);
 	const [formData, setFormData] = useState({ username: "", email: "", password: "" });
-	const [loading, setLoading] = useState(false); // Loader state
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(""); // Error state
+	const [showModal, setShowModal] = useState(false); // Modal visibility state
 	const navigate = useNavigate();
 
 	const handleChange = (e) => {
@@ -15,17 +34,35 @@ const LoginRegister = ({ onLogin }) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const endpoint = isLogin ? "/auth/login" : "/auth/register";
-		setLoading(true); // Start loading
+		setLoading(true);
+		setError(""); // Reset error before each submission
+
 		try {
 			const response = await axiosInstance.post(endpoint, formData);
-			localStorage.setItem("token", response.data.token); // Store the token
+			localStorage.setItem("token", response.data.token);
 			onLogin();
 			navigate("/dashboard");
 		} catch (error) {
-			console.error(error.response.data);
+			let errorMessage = "An error occurred. Please try again.";
+			if (error.response) {
+				// Customize error messages based on the response
+				if (error.response.status === 401) {
+					errorMessage = "Invalid email or password.";
+				} else if (error.response.status === 400) {
+					errorMessage = "Email is already registered.";
+				} else if (error.response.status === 404) {
+					errorMessage = "Email not found.";
+				}
+			}
+			setError(errorMessage);
+			setShowModal(true); // Show modal on error
 		} finally {
-			setLoading(false); // End loading
+			setLoading(false);
 		}
+	};
+
+	const closeModal = () => {
+		setShowModal(false);
 	};
 
 	return (
@@ -64,15 +101,9 @@ const LoginRegister = ({ onLogin }) => {
 				<button
 					type="submit"
 					className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-lg hover:bg-opacity-80 transition duration-200 font-semibold flex justify-center items-center"
-					disabled={loading} // Disable the button while loading
+					disabled={loading}
 				>
-					{loading ? (
-						<span className="loader"></span> // Custom loader component or style
-					) : isLogin ? (
-						"Login"
-					) : (
-						"Register"
-					)}
+					{loading ? <span className="loader"></span> : isLogin ? "Login" : "Register"}
 				</button>
 			</form>
 			<button
@@ -81,11 +112,12 @@ const LoginRegister = ({ onLogin }) => {
 			>
 				Switch to {isLogin ? "Register" : "Login"}
 			</button>
+			{showModal && <Modal message={error} onClose={closeModal} />} {/* Modal for error messages */}
 			<style>
 				{`
 					.loader {
 						border: 2px solid transparent;
-						border-top: 2px solid white; /* Change this to the desired loader color */
+						border-top: 2px solid white;
 						border-radius: 50%;
 						width: 20px;
 						height: 20px;
