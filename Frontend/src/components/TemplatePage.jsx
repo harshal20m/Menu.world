@@ -10,7 +10,6 @@ import Template6 from "./templates/Template6";
 import Template7 from "./templates/Template7";
 import Template8 from "./templates/Template8";
 import Template9 from "./templates/Template9";
-import Template10 from "./templates/Template10";
 import Template11 from "./templates/Template11";
 
 const templates = {
@@ -23,7 +22,6 @@ const templates = {
 	7: Template7,
 	8: Template8,
 	9: Template9,
-	10: Template10,
 	11: Template11,
 };
 

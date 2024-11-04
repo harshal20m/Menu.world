@@ -10,7 +10,6 @@ import Template6 from "./templates/Template6";
 import Template7 from "./templates/Template7";
 import Template8 from "./templates/Template8";
 import Template9 from "./templates/Template9";
-import Template10 from "./templates/Template10";
 import Template11 from "./templates/Template11";
 
 const templates = [
@@ -21,15 +20,18 @@ const templates = [
 	{ id: 5, name: "Template 5", description: "Sleek and minimal.", component: Template5 },
 	{ id: 6, name: "Template 6", description: "Stylish and bold.", component: Template6 },
 	{ id: 7, name: "Template 7", description: "Rustic and warm.", component: Template7 },
-	{ id: 8, name: "Template 8", description: "Modern and chic.", component: Template8 },
+	{
+		id: 8,
+		name: "Template 8",
+		description: "Modern and chic, note: images feature under development",
+		component: Template8,
+	},
 	{ id: 9, name: "Template 9", description: "Vintage and cozy.", component: Template9 },
-	{ id: 10, name: "Template 10", description: "Artistic and unique.", component: Template10 },
 	{ id: 11, name: "Template 11", description: "Elegant and sophisticated.", component: Template11 },
 ];
 
 const SelectTemplate = () => {
 	const navigate = useNavigate();
-	const [fullScreenTemplate, setFullScreenTemplate] = useState(null);
 
 	const dummyMenu = {
 		_id: "1",
@@ -57,10 +59,6 @@ const SelectTemplate = () => {
 		],
 	};
 
-	const handleView = (template) => {
-		setFullScreenTemplate(template);
-	};
-
 	const handleSelect = (template) => {
 		const token = localStorage.getItem("token"); // Check for token in local storage
 		if (token) {
@@ -72,55 +70,24 @@ const SelectTemplate = () => {
 		}
 	};
 
-	const closeFullScreen = () => {
-		setFullScreenTemplate(null);
-	};
-
 	return (
 		<div className="min-h-screen p-16 mt-5 bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white ">
 			<h2 className="text-4xl font-bold mb-6 text-center">Select a Template</h2>
 			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 				{templates.map((template) => (
 					<div key={template.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+						<div className="mb-4 ">{React.createElement(template.component, { menu: dummyMenu })}</div>
 						<h3 className="text-xl font-semibold">{template.name}</h3>
 						<p className="text-gray-600 dark:text-gray-400">{template.description}</p>
-						<div className="mt-4 flex space-x-2">
-							<button
-								className="px-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition"
-								onClick={() => handleView(template)}
-							>
-								<i className="text-xl bx bx-show"></i>
-							</button>
-							<button
-								className="px-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition"
-								onClick={() => handleSelect(template)}
-							>
-								<i className="bx bx-select-multiple"></i>
-							</button>
-						</div>
+						<button
+							className="mt-4 px-4 py-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition"
+							onClick={() => handleSelect(template)}
+						>
+							<i className="bx bx-select-multiple"></i> Select
+						</button>
 					</div>
 				))}
 			</div>
-
-			{fullScreenTemplate && (
-				<div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
-					<div
-						className="bg-white dark:bg-gray-800 rounded-lg p-4 max-w-lg w-full overflow-auto"
-						style={{ maxHeight: "90vh" }}
-					>
-						<h2 className="text-3xl font-bold mb-4">{fullScreenTemplate.name}</h2>
-						<div className="mb-6">
-							{React.createElement(fullScreenTemplate.component, { menu: dummyMenu })}
-						</div>
-						<button
-							className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
-							onClick={closeFullScreen}
-						>
-							Close
-						</button>
-					</div>
-				</div>
-			)}
 		</div>
 	);
 };
