@@ -3,7 +3,7 @@ import MyMenu from "./MyMenu";
 
 const Dashboard = () => {
 	return (
-		<div className="min-h-screen bg-gray-300 text-white p-8 flex flex-col dark:bg-gray-800">
+		<div className="min-h-screen mt-16   bg-gray-300 text-white p-8 flex flex-col dark:bg-gray-800">
 			<h2 className="text-4xl text-gray-800 dark:text-gray-200 font-bold mb-6">Dashboard</h2>
 			<div className="mb-4">
 				<Link

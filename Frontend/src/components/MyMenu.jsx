@@ -125,7 +125,7 @@ const MyMenu = () => {
 			{menus.length === 0 ? (
 				<p className="text-gray-800 dark:text-gray-200">No menus found.</p>
 			) : (
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+				<div className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 					{menus.map((menu) => (
 						<div
 							key={menu._id}

@@ -12,7 +12,7 @@ const Template8 = ({ menu }) => {
 
 			<div key={menu._id} className=" bg-[#111] rounded-lg   transition-all duration-300 hover:bg-opacity-50">
 				<h2 className="text-lg font-semibold text-[#ff4757] uppercase tracking-wider p-4 bg-[#1a1a1a]">
-					{menu.template}
+					Items
 				</h2>
 				<div className="p-4">
 					{menu.items.map((item) => (

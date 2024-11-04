@@ -63,7 +63,7 @@ const Template10 = ({ menu }) => {
 							</span>
 						</div>
 						<div className="font-serif">
-							<p>{item.description}</p>
+							<p className="text-black">{item.description}</p>
 						</div>
 					</div>
 				))}

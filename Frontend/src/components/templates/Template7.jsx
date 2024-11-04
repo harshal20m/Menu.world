@@ -11,23 +11,14 @@ const Template7 = ({ menu }) => {
 				<h1 className="text-3xl font-semibold tracking-widest capitalize">{menu.title}</h1>
 				<div className="absolute inset-0 bg-radial-gradient animate-pulse"></div>
 			</header>
-			<div className="flex justify-between bg-[#222] p-4 rounded-lg mb-6 relative">
-				{Array.from({ length: 4 }, (_, index) => (
-					<img
-						key={index}
-						src="/burger.jpeg?height=80&width=80"
-						alt={`Signature Dish ${index + 1}`}
-						className="w-20 h-20 object-cover rounded-full border-2 border-[#ff6b6b] transition-transform transform hover:scale-110 shadow-md"
-					/>
-				))}
-			</div>
+
 			<div className="grid gap-6">
 				<div
 					key={menu._id}
 					className="menu-section p-4 relative bg-[#1a1a1a] rounded-lg transition-all duration-300 hover:bg-opacity-50"
 				>
 					<h2 className="text-xl font-semibold text-[#ff6b6b] mb-4 uppercase tracking-wider relative inline-block">
-						{menu.title}
+						Items
 						<div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#ff6b6b] transform scale-x-0 transition-transform duration-300"></div>
 					</h2>
 					{menu.items.map((item) => (

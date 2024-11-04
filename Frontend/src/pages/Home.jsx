@@ -17,7 +17,7 @@ export default function Home({ isAuthenticated = false }) {
 
 	return (
 		<div
-			className={`relative  sm:h-[92vh] overflow-hidden bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100`}
+			className={`relative mt-16 sm:mt-0  sm:h-[92vh] overflow-hidden bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100`}
 		>
 			<motion.div className="absolute inset-0 z-0">
 				{[...Array(100)].map((_, i) => (
