@@ -71,11 +71,11 @@ const SelectTemplate = () => {
 	};
 
 	return (
-		<div className="min-h-screen p-16 mt-5 bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white ">
+		<div className="min-h-screen pt-16 p-5 sm:p-16 mt-5 bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white ">
 			<h2 className="text-4xl font-bold mb-6 text-center">Select a Template</h2>
 			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 				{templates.map((template) => (
-					<div key={template.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+					<div key={template.id} className="bg-white dark:bg-gray-800  rounded-lg shadow-md p-4">
 						<div className="mb-4 ">{React.createElement(template.component, { menu: dummyMenu })}</div>
 						<h3 className="text-xl font-semibold">{template.name}</h3>
 						<p className="text-gray-600 dark:text-gray-400">{template.description}</p>
