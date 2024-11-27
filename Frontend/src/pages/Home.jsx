@@ -152,7 +152,7 @@ function FeatureCard1({ image, title, description }) {
 					whileTap={{ scale: 0.95 }}
 					className="flex flex-col items-center text-center"
 				>
-					<img src={image} alt="image" className="w-full h-56 sm:h-64 object-cover" />
+					<img src={image} alt="image" className="w-full rounded-t-lg h-56 sm:h-64 object-cover" />
 					<h3 className="mt-4 mb-2 text-lg text-start font-semibold">{title}</h3>
 					<p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>
 				</motion.div>
