@@ -10,6 +10,9 @@ export default function Home({ isAuthenticated = false }) {
 	const handleExploreTemplates = () => {
 		window.location.href = "/explore";
 	};
+	const handleDashboard = () => {
+		window.location.href = "/dashboard";
+	};
 
 	useEffect(() => {
 		document.body.classList.toggle("dark", localStorage.getItem("theme") === "dark");
@@ -74,6 +77,14 @@ export default function Home({ isAuthenticated = false }) {
 					>
 						Explore Templates
 					</button>
+					{isAuthenticated && (
+						<button
+							onClick={handleDashboard}
+							className="border border-green-500 text-green-500 hover:bg-green-500 hover:text-white font-semibold py-2 px-4 rounded-lg"
+						>
+							My Menus
+						</button>
+					)}
 				</motion.div>
 
 				<motion.div

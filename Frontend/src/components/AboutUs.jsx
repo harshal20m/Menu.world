@@ -37,7 +37,7 @@ const AboutUs = () => {
 	};
 
 	return (
-		<div className="container dark:bg-gray-900 mt-16 mx-auto px-4 py-8 max-w-4xl">
+		<div className="container bg-white dark:bg-gray-900 mt-16 mx-auto px-4 py-8 max-w-4xl">
 			<h1 className="text-4xl font-bold text-center text-gray-800 dark:text-gray-200 mb-8">About Us</h1>
 
 			<div className="bg-white dark:bg-gray-800 rounded-lg shadow-md mb-8">

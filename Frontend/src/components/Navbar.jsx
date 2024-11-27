@@ -70,7 +70,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
 					<div className="flex items-center  sm:ml-6">
 						<button onClick={toggleTheme} className="dark:text-white pt-1" aria-label="Toggle theme">
 							<i
-								className={`bx ${theme === "light" ? "bx-moon" : "bx-sun"}`}
+								className={`bx ${theme === "light" ? "bxs-sun" : "bxs-moon"}`}
 								style={{ fontSize: "20px" }}
 							></i>
 						</button>

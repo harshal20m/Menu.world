@@ -57,7 +57,7 @@ const MenuPage = () => {
 	}
 
 	return (
-		<div className="mt-16 m-4 pt-12 mb-10">
+		<div className="mt-16 min-h-[90vh] m-4 pt-12 mb-10">
 			<TemplateComponent menu={menu} />
 		</div>
 	);

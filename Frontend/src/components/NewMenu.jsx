@@ -19,10 +19,11 @@ const templates = [
 const NewMenu = () => {
 	const [menuTitle, setMenuTitle] = useState("");
 	const [menuTemplate, setMenuTemplate] = useState("");
-	const [items, setItems] = useState([{ name: "", price: "", description: "" }]);
+	const [items, setItems] = useState([]);
+	const [newItem, setNewItem] = useState({ name: "", price: "", description: "" });
+	const [expandedItemIndex, setExpandedItemIndex] = useState(null); // Track expanded description
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState("");
-	const [isModalOpen, setIsModalOpen] = useState(false);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -32,24 +33,31 @@ const NewMenu = () => {
 		}
 	}, []);
 
-	const handleChangeItem = (index, event) => {
-		const values = [...items];
-		values[index][event.target.name] = event.target.value;
-		setItems(values);
+	const handleNewItemChange = (e) => {
+		const { name, value } = e.target;
+		setNewItem((prev) => ({ ...prev, [name]: value }));
 	};
 
 	const handleAddItem = () => {
-		setItems([...items, { name: "", price: "", description: "" }]);
+		if (!newItem.name || !newItem.price) {
+			setError("Item name and price are required.");
+			return;
+		}
+		setItems([...items, newItem]);
+		setNewItem({ name: "", price: "", description: "" });
+		setError("");
 	};
 
 	const handleRemoveItem = (index) => {
-		const values = [...items];
-		values.splice(index, 1);
-		setItems(values);
+		const updatedItems = items.filter((_, i) => i !== index);
+		setItems(updatedItems);
+	};
+
+	const toggleExpand = (index) => {
+		setExpandedItemIndex(expandedItemIndex === index ? null : index);
 	};
 
 	const handleSubmit = async () => {
-		setIsModalOpen(false); // Close the modal before submitting
 		try {
 			await axiosInstance.post("/menus", {
 				title: menuTitle,
@@ -61,27 +69,19 @@ const NewMenu = () => {
 			setError("");
 			setMenuTitle("");
 			setMenuTemplate("");
-			setItems([{ name: "", price: "", description: "" }]);
+			setItems([]);
 		} catch (error) {
 			setError("Failed to create menu.");
 			setSuccess("");
 		}
 	};
 
-	const openModal = (e) => {
-		e.preventDefault(); // Prevent default form submission
-		setIsModalOpen(true); // Open the modal
-	};
-
 	return (
-		<div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white">
+		<div className="flex flex-col mt-16 items-center justify-center min-h-screen p-6 bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white">
 			<h2 className="text-3xl sm:text-4xl font-bold text-center mb-6 text-blue-600 dark:text-blue-400">
 				Create New Menu
 			</h2>
-			<form
-				onSubmit={openModal}
-				className="w-full max-w-lg space-y-5 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg"
-			>
+			<div className="w-full max-w-lg space-y-5 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
 				<div>
 					<label className="block text-sm sm:text-lg font-medium mb-1">Menu Title:</label>
 					<input
@@ -89,7 +89,7 @@ const NewMenu = () => {
 						value={menuTitle}
 						onChange={(e) => setMenuTitle(e.target.value)}
 						required
-						className="border border-gray-300 dark:border-gray-600 p-2 sm:p-3 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white w-full focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition duration-200 text-sm sm:text-base"
+						className="border border-gray-300 dark:border-gray-600 p-2 sm:p-3 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white w-full"
 					/>
 				</div>
 				<div>
@@ -98,9 +98,9 @@ const NewMenu = () => {
 						value={menuTemplate}
 						onChange={(e) => setMenuTemplate(e.target.value)}
 						required
-						className="border border-gray-300 dark:border-gray-600 p-2 sm:p-3 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white w-full focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition duration-200 text-sm sm:text-base"
+						className="border border-gray-300 dark:border-gray-600 p-2 sm:p-3 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white w-full"
 					>
-						<option value="">Confirm Your Template</option>
+						<option value="">Select Template</option>
 						{templates.map((template) => (
 							<option key={template.id} value={template.id}>
 								{template.name}
@@ -109,95 +109,113 @@ const NewMenu = () => {
 					</select>
 				</div>
 				<div>
-					<h3 className="text-xl sm:text-2xl font-semibold mt-4">Menu Items:</h3>
-					{items.map((item, index) => (
-						<div
-							key={index}
-							className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4 mb-5 border border-gray-300 dark:border-gray-600 p-4 rounded-md bg-gray-50 dark:bg-gray-700 shadow-sm"
+					<h3 className="text-xl sm:text-2xl font-semibold mt-4">Add Menu Item:</h3>
+					<div className="space-y-4">
+						<input
+							type="text"
+							name="name"
+							value={newItem.name}
+							onChange={handleNewItemChange}
+							placeholder="Item Name"
+							required
+							className="border border-gray-300 dark:border-gray-600 p-2 sm:p-3 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white w-full"
+						/>
+						<input
+							type="number"
+							name="price"
+							value={newItem.price}
+							onChange={handleNewItemChange}
+							placeholder="Price"
+							required
+							className="border border-gray-300 dark:border-gray-600 p-2 sm:p-3 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white w-full"
+						/>
+						<input
+							type="text"
+							name="description"
+							value={newItem.description}
+							onChange={handleNewItemChange}
+							placeholder="Description (Optional)"
+							className="border border-gray-300 dark:border-gray-600 p-2 sm:p-3 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white w-full"
+						/>
+						<button
+							type="button"
+							onClick={handleAddItem}
+							className="bg-green-500 text-white rounded-md p-3 hover:bg-green-600 transition duration-200"
 						>
-							<div className="flex-1">
-								<label className="block text-sm sm:text-md font-medium mb-1">Item Name:</label>
-								<input
-									type="text"
-									name="name"
-									value={item.name}
-									onChange={(e) => handleChangeItem(index, e)}
-									required
-									className="border border-gray-300 dark:border-gray-600 p-2 sm:p-3 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white w-full focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition duration-200 text-sm sm:text-base"
-								/>
-							</div>
-							<div className="flex-1">
-								<label className="block text-sm sm:text-md font-medium mb-1">Price:</label>
-								<input
-									type="number"
-									name="price"
-									value={item.price}
-									onChange={(e) => handleChangeItem(index, e)}
-									required
-									className="border border-gray-300 dark:border-gray-600 p-2 sm:p-3 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white w-full focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition duration-200 text-sm sm:text-base"
-								/>
-							</div>
-							<div className="flex-1">
-								<label className="block text-sm sm:text-md font-medium mb-1">Description:</label>
-								<input
-									type="text"
-									name="description"
-									value={item.description}
-									onChange={(e) => handleChangeItem(index, e)}
-									className="border border-gray-300 dark:border-gray-600 p-2 sm:p-3 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white w-full focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition duration-200 text-sm sm:text-base"
-								/>
-							</div>
-							<button
-								type="button"
-								onClick={() => handleRemoveItem(index)}
-								className="bg-red-500 text-white rounded-md p-2 hover:bg-red-600 transition duration-200 mt-4 md:mt-0"
-							>
-								Remove
-							</button>
-						</div>
-					))}
-					<button
-						type="button"
-						onClick={handleAddItem}
-						className="bg-green-500 text-white rounded-md p-3 hover:bg-green-600 transition duration-200 mt-4"
-					>
-						Add Item
-					</button>
+							Add Item
+						</button>
+					</div>
 				</div>
-				<button
-					type="submit"
-					className="bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 transition duration-200 w-full"
-				>
-					Create Menu
-				</button>
-			</form>
+			</div>
+
+			{/* Responsive Table */}
+			<div className="w-full max-w-5xl mt-10">
+				<h3 className="text-2xl sm:text-3xl text-center font-semibold mb-4">Menu Items</h3>
+				<table className="table-auto w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 rounded-md shadow-lg">
+					<thead>
+						<tr className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
+							<th className="px-4 py-2">#</th>
+							<th className="px-4 py-2">Item Name</th>
+							<th className="px-4 py-2">Price</th>
+							<th className="px-4 py-2 hidden sm:table-cell">Description</th>
+							<th className="px-4 py-2">Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{(!items || items.length === 0) && (
+							<tr>
+								<td colSpan="5" className="text-center p-4 ">
+									No items added yet!
+								</td>
+							</tr>
+						)}
+
+						{items.map((item, index) => (
+							<>
+								<tr key={index} className="text-center  text-sm ">
+									<td className="border px-4 py-2">{index + 1}</td>
+									<td className="border px-4 py-2">{item.name}</td>
+									<td className="border px-4 py-2">{item.price}</td>
+									<td className="border px-4 py-2 hidden sm:table-cell">{item.description}</td>
+									<td className="border px-4 py-2 flex justify-center space-x-2">
+										<button
+											onClick={() => handleRemoveItem(index)}
+											className="bg-red-500 text-white rounded-md p-2 hover:bg-red-600 transition duration-200"
+										>
+											<i className="bx bxs-trash-alt"></i>
+										</button>
+										<button
+											onClick={() => toggleExpand(index)}
+											className="bg-blue-500 text-white rounded-md p-2 hover:bg-blue-600 transition duration-200 sm:hidden"
+										>
+											{expandedItemIndex === index ? "x" : <i className="bx bx-info-circle"></i>}
+										</button>
+									</td>
+								</tr>
+								{/* Expanded description row for mobile */}
+								{expandedItemIndex === index && (
+									<tr className="sm:hidden">
+										<td colSpan="5" className="border px-4 py-2 text-left">
+											<strong>Description:</strong>{" "}
+											{item.description || "No description provided."}
+										</td>
+									</tr>
+								)}
+							</>
+						))}
+					</tbody>
+				</table>
+			</div>
+
+			<button
+				onClick={handleSubmit}
+				className="mt-6 bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 transition duration-200"
+			>
+				Save Menu
+			</button>
 
 			{error && <p className="text-red-500 mt-4 text-center">{error}</p>}
 			{success && <p className="text-green-500 mt-4 text-center">{success}</p>}
-
-			{/* Modal for confirmation */}
-			{isModalOpen && (
-				<div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-					<div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
-						<h3 className="text-lg font-semibold mb-4">Confirm Submission</h3>
-						<p>Are you sure you want to create this menu?</p>
-						<div className="mt-4 flex justify-end">
-							<button
-								className="bg-red-500 text-white rounded-md p-2 hover:bg-red-600 transition duration-200 mr-2"
-								onClick={() => setIsModalOpen(false)}
-							>
-								Cancel
-							</button>
-							<button
-								className="bg-green-500 text-white rounded-md p-2 hover:bg-green-600 transition duration-200"
-								onClick={handleSubmit}
-							>
-								Confirm
-							</button>
-						</div>
-					</div>
-				</div>
-			)}
 		</div>
 	);
 };
