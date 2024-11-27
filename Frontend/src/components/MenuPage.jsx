@@ -25,7 +25,7 @@ const templates = {
 	11: Template11,
 };
 
-const TemplatePage = () => {
+const MenuPage = () => {
 	const { id } = useParams();
 	const [menu, setMenu] = useState(null);
 	const [TemplateComponent, setTemplateComponent] = useState(null);
@@ -63,4 +63,4 @@ const TemplatePage = () => {
 	);
 };
 
-export default TemplatePage;
+export default MenuPage;

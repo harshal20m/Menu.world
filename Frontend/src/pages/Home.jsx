@@ -99,6 +99,29 @@ export default function Home({ isAuthenticated = false }) {
 					/>
 				</motion.div>
 			</motion.div>
+
+			<section className="bg-white dark:bg-gray-900 py-16 px-6 sm:px-12 animate__animated animate__fadeInUp animate__delay-4s">
+				<h2 className="text-3xl sm:text-4xl text-center font-bold mb-10 text-gray-900 dark:text-gray-100">
+					Our Solutions
+				</h2>
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+					<FeatureCard1
+						image="/images/dinein.jpg"
+						title="DineIn"
+						description="Customers scan the QR code on the table & access the menu on their mobile devices seamlessly. Waiter collects the order as per customer demand."
+					/>
+					<FeatureCard1
+						image="/images/pickup.jpg"
+						title="Pickup Food Stalls"
+						description="Customers scan the QR code on the truck or access the menu via social media handle of seller (Instagram, Facebook, etc.)."
+					/>
+					<FeatureCard1
+						image="/images/delivery.jpg"
+						title="Delivery with Menu QR Card"
+						description="Customers order from food apps. With the parcel, you can stick your QR code sticker so they can explore your other items by scanning the QR card."
+					/>
+				</div>
+			</section>
 		</div>
 	);
 }
@@ -113,6 +136,23 @@ function FeatureCard({ icon, title, description }) {
 					className="flex flex-col items-center text-center"
 				>
 					{icon}
+					<h3 className="mt-4 mb-2 text-lg font-semibold">{title}</h3>
+					<p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>
+				</motion.div>
+			</div>
+		</div>
+	);
+}
+function FeatureCard1({ image, title, description }) {
+	return (
+		<div className="overflow-hidden border rounded-lg shadow-md">
+			<div className="p-6">
+				<motion.div
+					whileHover={{ scale: 1.05 }}
+					whileTap={{ scale: 0.95 }}
+					className="flex flex-col items-center text-center"
+				>
+					<img src={image} alt="image" />
 					<h3 className="mt-4 mb-2 text-lg font-semibold">{title}</h3>
 					<p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>
 				</motion.div>

@@ -22,7 +22,7 @@ const LoginRegister = ({ onLogin }) => {
 			onLogin();
 			navigate("/dashboard");
 		} catch (error) {
-			console.error(error.response.data);
+			alert("wrong email or password!");
 		} finally {
 			setLoading(false);
 		}

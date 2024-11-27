@@ -17,7 +17,6 @@ axiosInstance.interceptors.request.use(
 		return config;
 	},
 	(error) => {
-		console.log("token nhi mila");
 		return Promise.reject(error);
 	}
 );
@@ -26,7 +25,7 @@ axiosInstance.interceptors.response.use(
 	(response) => response,
 	(error) => {
 		// Handle errors globally
-		console.error("API call error:", error);
+
 		return Promise.reject(error);
 	}
 );
