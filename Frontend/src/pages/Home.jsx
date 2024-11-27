@@ -17,7 +17,7 @@ export default function Home({ isAuthenticated = false }) {
 
 	return (
 		<div
-			className={`relative mt-16 sm:mt-0  sm:h-[92vh] overflow-hidden bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100`}
+			className={`relative mt-16 sm:mt-0  sm:min-h-[92vh] overflow-hidden bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100`}
 		>
 			<motion.div className="absolute inset-0 z-0">
 				{[...Array(100)].map((_, i) => (
@@ -152,8 +152,8 @@ function FeatureCard1({ image, title, description }) {
 					whileTap={{ scale: 0.95 }}
 					className="flex flex-col items-center text-center"
 				>
-					<img src={image} alt="image" />
-					<h3 className="mt-4 mb-2 text-lg font-semibold">{title}</h3>
+					<img src={image} alt="image" className="w-full h-56 sm:h-64 object-cover" />
+					<h3 className="mt-4 mb-2 text-lg text-start font-semibold">{title}</h3>
 					<p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>
 				</motion.div>
 			</div>
